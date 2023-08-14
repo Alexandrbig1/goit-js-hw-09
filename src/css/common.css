@@ -24,7 +24,7 @@ img {
   margin-top: 50px;
 }
 
-button {
+.btn-container button {
   cursor: pointer;
   padding: 12px 48px;
   border-radius: 8px;
@@ -35,7 +35,45 @@ button {
   font-weight: 500;
 }
 
-button:hover {
-  background-color: #ababab;
-  color: #fdfdfd;
+.btn-container button:hover {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 12px;
+  margin-left: 20px;
+}
+
+.timer-btn input {
+  width: 210px;
+  padding: 4px 24px 4px 8px;
+}
+
+.timer-btn button {
+  padding: 4px 12px;
+}
+
+.timer {
+  display: flex;
+  gap: 24px;
+}
+
+.value {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 500;
 }

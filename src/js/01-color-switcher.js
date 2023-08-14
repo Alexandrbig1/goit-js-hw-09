@@ -9,10 +9,14 @@ elements.stopBtn.addEventListener('click', onStopBtnClick);
 let timeId = null;
 let startBtnActive = false;
 
+elements.stopBtn.disabled = true;
+
 function onStartBtnClick() {
   timeId = setInterval(changeColor, 1000);
+  elements.stopBtn.disabled = false;
 
   if (!startBtnActive) {
+    elements.startBtn.disabled = true;
     elements.startBtn.removeEventListener('click', onStartBtnClick);
   }
 }
@@ -20,7 +24,9 @@ function onStartBtnClick() {
 function onStopBtnClick() {
   clearInterval(timeId);
   if (!startBtnActive) {
+    elements.startBtn.disabled = false;
     elements.startBtn.addEventListener('click', onStartBtnClick);
+    elements.stopBtn.disabled = true;
   }
 }
 
