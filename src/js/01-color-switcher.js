@@ -1,18 +1,27 @@
-const refs = {
+const elements = {
   startBtn: document.querySelector('[data-start]'),
   stopBtn: document.querySelector('[data-stop]'),
 };
 
-refs.startBtn.addEventListener('click', onStartBtnClick);
-refs.stopBtn.addEventListener('click', onStopBtnClick);
+elements.startBtn.addEventListener('click', onStartBtnClick);
+elements.stopBtn.addEventListener('click', onStopBtnClick);
+
+let timeId = null;
+let startBtnActive = false;
 
 function onStartBtnClick() {
-  changeColor();
-  // const timeId = setInterval(onStartBtnClick, 1000);
+  timeId = setInterval(changeColor, 1000);
+
+  if (!startBtnActive) {
+    elements.startBtn.removeEventListener('click', onStartBtnClick);
+  }
 }
 
 function onStopBtnClick() {
   clearInterval(timeId);
+  if (!startBtnActive) {
+    elements.startBtn.addEventListener('click', onStartBtnClick);
+  }
 }
 
 function changeColor() {

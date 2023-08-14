@@ -16,3 +16,26 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 50px;
+}
+
+button {
+  cursor: pointer;
+  padding: 12px 48px;
+  border-radius: 8px;
+  border: none;
+  background-color: #dedede;
+  transition: 0.3s;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+button:hover {
+  background-color: #ababab;
+  color: #fdfdfd;
+}
