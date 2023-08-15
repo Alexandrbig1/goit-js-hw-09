@@ -10,31 +10,56 @@ const elements = {
   seconds: document.querySelector('[data-seconds'),
 };
 
-// elements.startBtn.addEventListener('click', onStartBtnCountdown);
-
 elements.startBtn.disabled = true;
 
-let totalMs = 0;
-let currentTime = new Date();
-pickingDate();
+let dates = '';
 
-function pickingDate() {
-  const options = {
-    enableTime: true,
-    time_24hr: true,
-    defaultDate: new Date(),
-    minuteIncrement: 1,
-    onClose(selectedDates) {
-      if (selectedDates[0] > currentTime) {
-        elements.startBtn.disabled = false;
-        elements.startBtn.addEventListener('click', onStartBtnCountdown);
-        totalMs = selectedDates[0] - currentTime;
-      } else {
-        window.alert('Please choose a date in the future');
-      }
-    },
-  };
-  flatpickr(elements.dateInput, options);
+const options = {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    if (selectedDates[0] < new Date()) {
+      window.alert('Please choose a date in the future');
+    } else {
+      elements.startBtn.disabled = false;
+      elements.startBtn.addEventListener('click', onStartBtnCountdown);
+      dates = selectedDates[0];
+    }
+  },
+};
+
+flatpickr(elements.dateInput, options);
+
+let intervalId = 0;
+
+function onStartBtnCountdown() {
+  intervalId = setInterval(createTimer, 1000);
+}
+
+function createTimer() {
+  const totalMs = dates - new Date();
+  const dayPicker = convertMs(totalMs).days;
+  const hoursPicker = convertMs(totalMs).hours;
+  const minutesPicker = convertMs(totalMs).minutes;
+  const secondsPicker = convertMs(totalMs).seconds;
+  elements.days.textContent = dayPicker < 10 ? '0' + dayPicker : dayPicker;
+  elements.hours.textContent =
+    hoursPicker < 10 ? '0' + hoursPicker : hoursPicker;
+  elements.minutes.textContent =
+    minutesPicker < 10 ? '0' + minutesPicker : minutesPicker;
+  elements.seconds.textContent =
+    secondsPicker < 10 ? '0' + secondsPicker : secondsPicker;
+
+  if (minutesPicker === 0 && secondsPicker === 0) {
+    clearTimer();
+  }
+}
+
+function clearTimer() {
+  clearInterval(intervalId);
+  elements.startBtn.disabled = true;
 }
 
 function convertMs(ms) {
@@ -55,64 +80,3 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-
-function creating() {
-  const dayPicker = convertMs(totalMs).days;
-  const hoursPicker = convertMs(totalMs).hours;
-  const minutesPicker = convertMs(totalMs).minutes;
-  const secondsPicker = convertMs(totalMs).seconds;
-  elements.days.textContent = dayPicker < 10 ? '0' + dayPicker : dayPicker;
-  elements.hours.textContent =
-    hoursPicker < 10 ? '0' + hoursPicker : hoursPicker;
-  elements.minutes.textContent =
-    minutesPicker < 10 ? '0' + minutesPicker : minutesPicker;
-  elements.seconds.textContent =
-    secondsPicker < 10 ? '0' + secondsPicker : secondsPicker;
-}
-
-function onStartBtnCountdown() {
-  setInterval(creating, 1000);
-}
-
-// elements.startBtn.disabled = true;
-// const currentTime = new Date();
-// console.log(currentTime);
-
-// const options = {
-//   enableTime: true,
-//   time_24hr: true,
-//   defaultDate: new Date(),
-//   minuteIncrement: 1,
-//   onClose(selectedDates) {
-//     const selectedDate = selectedDates[0];
-//     if (selectedDate < currentTime) {
-//       window.alert('Please choose a date in the future');
-//     } else {
-//       elements.startBtn.disabled = false;
-//     }
-//   },
-// };
-
-// flatpickr(elements.dateInput, options);
-
-// 1111111
-
-// onClose(selectedDates) {
-//     if (selectedDates[0] > currentTime) {
-//       elements.startBtn.disabled = false;
-//       const totalMs = selectedDates[0] - currentTime;
-//       const dayPicker = convertMs(totalMs).days;
-//       const hoursPicker = convertMs(totalMs).hours;
-//       const minutesPicker = convertMs(totalMs).minutes;
-//       const secondsPicker = convertMs(totalMs).seconds;
-//       elements.days.textContent = dayPicker < 10 ? '0' + dayPicker : dayPicker;
-//       elements.hours.textContent =
-//         hoursPicker < 10 ? '0' + hoursPicker : hoursPicker;
-//       elements.minutes.textContent =
-//         minutesPicker < 10 ? '0' + minutesPicker : minutesPicker;
-//       elements.seconds.textContent =
-//         secondsPicker < 10 ? '0' + secondsPicker : secondsPicker;
-//     } else {
-//       window.alert('Please choose a date in the future');
-//     }
-//   },
