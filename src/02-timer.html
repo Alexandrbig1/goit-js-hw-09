@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Countdown timer</title>
+
     <link rel="stylesheet" href="css/common.css" />
   </head>
   <body>
@@ -37,41 +38,3 @@
     <script src="js/02-timer.js" type="module"></script>
   </body>
 </html>
-<!-- 
-elements.startBtn.disabled = true;
-const currentTime = new Date();
-
-const options = {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-    if (selectedDates[0] < currentTime) {
-      window.alert('Please choose a date in the future');
-    } else {
-      elements.startBtn.disabled = false;
-      const selectedTime = selectedDates[0] - currentTime;
-
-      const dayEl = Math.floor(selectedTime / 1000 / 60 / 60 / 24);
-      const hoursEl = Math.floor(selectedTime / 1000 / 60 / 60) % 24;
-      const minutesEl = Math.floor(selectedTime / 1000 / 60) % 60;
-      const secondsEl = Math.floor(selectedTime / 1000) % 60;
-
-      elements.days.textContent = dayEl < 10 ? '0' + dayEl : dayEl;
-      elements.hours.textContent = hoursEl < 10 ? '0' + hoursEl : hoursEl;
-      elements.minutes.textContent =
-        minutesEl < 10 ? '0' + minutesEl : minutesEl;
-      elements.seconds.textContent =
-        secondsEl < 10 ? '0' + secondsEl : secondsEl;
-
-      elements.startBtn.addEventListener('click', onStartBtnCountdown);
-    }
-  },
-};
-
-flatpickr(elements.dateInput, options);
-
-function onStartBtnCountdown() {
-  setInterval(flatpickr, 1000);
-} -->
