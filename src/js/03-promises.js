@@ -1,6 +1,7 @@
 import Notiflix from 'notiflix';
 
 const formEl = document.querySelector('.form');
+const btnEl = document.querySelector('[type="submit"]');
 
 formEl.addEventListener('submit', onSubmitClick);
 
@@ -25,6 +26,14 @@ function onSubmitClick(e) {
       });
     delay += step;
   }
+  // #1
+  // formEl.reset();
+  // #2
+  btnEl.disabled = true;
+  // #3
+  // formEl.delay.value = '';
+  // formEl.step.value = '';
+  // formEl.amount.value = '';
 }
 
 function createPromise(position, delay) {

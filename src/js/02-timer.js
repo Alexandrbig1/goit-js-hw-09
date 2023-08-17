@@ -11,6 +11,8 @@ const elements = {
   seconds: document.querySelector('[data-seconds'),
 };
 
+elements.startBtn.addEventListener('click', onStartBtnCountdown);
+
 elements.startBtn.disabled = true;
 
 let dates = '';
@@ -25,7 +27,6 @@ const options = {
       Notiflix.Notify.failure('Please choose a date in the future');
     } else {
       elements.startBtn.disabled = false;
-      elements.startBtn.addEventListener('click', onStartBtnCountdown);
       dates = selectedDates[0];
     }
   },
@@ -37,6 +38,8 @@ let intervalId = 0;
 
 function onStartBtnCountdown() {
   intervalId = setInterval(createTimer, 1000);
+  elements.startBtn.disabled = true;
+  elements.dateInput.disabled = true;
 }
 
 function createTimer() {
